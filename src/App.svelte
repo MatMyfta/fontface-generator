@@ -5,17 +5,18 @@
   import GeneratedCode from "./components/GeneratedCode.svelte";
 
   let currentStep = 1;
-  let uploadedFiles = [];
+  // let uploadedFiles = [];
   let fontSettings = [];
   let generatedCode = "";
 
   const nextStep = () => (currentStep += 1);
   const prevStep = () => (currentStep -= 1);
 
-  const handleFilesUpload = (files) => {
-    uploadedFiles = files;
-    nextStep();
-  };
+  // const handleFilesUpload = (files) => {
+  //   console.log('Files received in handleFilesUpload:', files);
+  //   uploadedFiles = files;
+  //   nextStep();
+  // };
 
   const handleSettingsSubmit = (settings) => {
     fontSettings = settings;
@@ -43,14 +44,15 @@
   <ProgressBar {currentStep} />
   <div class="flex-grow container mx-auto p-4">
     {#if currentStep === 1}
-      <Upload on:filesUploaded={(e) => handleFilesUpload(e.detail)} />
+      <!-- <Upload on:filesUploaded="{(e) => handleFilesUpload(e.detail.files)}" /> -->
+      <Upload on:nextStep="{nextStep}" />
     {:else if currentStep === 2}
       <FontSettings
-        on:settingsSubmitted={(e) => handleSettingsSubmit(e.detail)}
-        on:goBack={prevStep}
+        on:settingsSubmitted="{(e) => handleSettingsSubmit(e.detail)}"
+        on:goBack="{prevStep}"
       />
     {:else if currentStep === 3}
-      <GeneratedCode {generatedCode} on:goBack={prevStep} />
+      <GeneratedCode {generatedCode} on:goBack="{prevStep}" />
     {/if}
   </div>
 </div>

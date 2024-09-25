@@ -1,16 +1,26 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { uploadedFilesStore } from "../stores";
   const dispatch = createEventDispatcher();
   export let uploadedFiles = [];
 
-  let settings = uploadedFiles.map((file) => ({
-    fileName: file.name,
-    fontFamily: file.name.split(".")[0],
-    fontWeight: "400",
-    fontStyle: "normal",
-  }));
+  uploadedFilesStore.subscribe((files) => {
+    uploadedFiles = files;
+    console.log("Uploaded files in Step2 (store):", uploadedFiles);
+  });
 
-  console.log(uploadedFiles, settings);
+  $: console.log("Uploaded files in Step2:", uploadedFiles);
+  $: settings = uploadedFiles.length
+    ? uploadedFiles.map((file) => ({
+        fileName: file.name,
+        fontFamily: file.name.split(".")[0],
+        fontWeight: "400",
+        fontStyle: "normal",
+      }))
+    : [];
+  $: console.log("Settings in Step2:", settings);
+
+  // console.log(uploadedFiles, settings);
 
   const fontWeights = [
     "100",

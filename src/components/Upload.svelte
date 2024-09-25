@@ -1,15 +1,19 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { uploadedFilesStore } from "../stores";
   const dispatch = createEventDispatcher();
   let files = [];
 
   const handleFileChange = (event) => {
     files = Array.from(event.target.files);
+    console.log("Files selected in Step1:", files);
   };
 
   const proceedToNext = () => {
     if (files.length > 0) {
-      dispatch("filesUploaded", files);
+      uploadedFilesStore.set(files);
+      dispatch("nextStep");
+      //   dispatch("filesUploaded", { files });
     }
   };
 </script>
