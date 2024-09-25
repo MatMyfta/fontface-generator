@@ -13,7 +13,6 @@
   const prevStep = () => (currentStep -= 1);
 
   // const handleFilesUpload = (files) => {
-  //   console.log('Files received in handleFilesUpload:', files);
   //   uploadedFiles = files;
   //   nextStep();
   // };
@@ -36,7 +35,8 @@
       }
     `
       )
-      .join("/n");
+      .join(`
+`);
   };
 </script>
 

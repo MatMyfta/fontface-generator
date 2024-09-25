@@ -8,14 +8,21 @@
     uploadedFiles = files;
   });
 
-  $: settings = uploadedFiles.length
-    ? uploadedFiles.map((file) => ({
-        fileName: file.name,
-        fontFamily: file.name.split(".")[0],
-        fontWeight: "400",
-        fontStyle: "normal",
-      }))
-    : [];
+  let settingsInitialized = false;
+  let settings = [];
+
+  $: if (!settingsInitialized && uploadedFiles.length > 0) {
+    settings = uploadedFiles.length
+      ? uploadedFiles.map((file) => ({
+          fileName: file.name,
+          fontFamily: file.name.split(".")[0],
+          fontWeight: "400",
+          fontStyle: "normal",
+        }))
+      : [];
+    settingsInitialized = true;
+  }
+  $: console.log(settings);
 
   const fontWeights = [
     "100",
