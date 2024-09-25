@@ -49,36 +49,42 @@
 <div class="bg-white p-6 rounded shadow-md">
   <h2 class="text-xl font-bold mb-4">Font Settings</h2>
   {#each settings as setting, index}
-    <div class="mb-4">
-      <h3 class="font-semibold">{setting.fileName}</h3>
-      <input
-        type="text"
-        bind:value={setting.fontFamily}
-        placeholder="Font Family"
-        class="block w-full mt-2 mb-2"
-      />
+    <div class="mb-4 grid grid-cols-6">
+      <div class="flex flex-col col-span-4 p-2">
+        <h3 class="font-semibold">{setting.fileName}</h3>
+        <input
+          type="text"
+          bind:value={setting.fontFamily}
+          placeholder="Font Family"
+          class="block w-full mt-2 mb-2 col-span-4"
+        />
+      </div>
 
-      <label class="block mb-2" for="select-font-weight">Font Weight</label>
-      <select
-        bind:value={setting.fontWeight}
-        id="select-font-weight"
-        class="block w-full mb-2"
-      >
-        {#each fontWeights as weight}
-          <option value={weight}>{weight}</option>
-        {/each}
-      </select>
+      <div class="flex flex-col p-2">
+        <label class="block mb-2" for="select-font-weight">Font Weight</label>
+        <select
+          bind:value={setting.fontWeight}
+          id="select-font-weight"
+          class="block w-full mb-2"
+        >
+          {#each fontWeights as weight}
+            <option value={weight}>{weight}</option>
+          {/each}
+        </select>
+      </div>
 
-      <label class="block mb-1" for="select-font-style">Font Style</label>
-      <select
-        bind:value={setting.fontStyle}
-        id="select-font-style"
-        class="block w-full mb-2"
-      >
-        {#each fontStyles as style}
-          <option value={style}>{style}</option>
-        {/each}
-      </select>
+      <div class="flex flex-col p-2">
+        <label class="block mb-1" for="select-font-style">Font Style</label>
+        <select
+          bind:value={setting.fontStyle}
+          id="select-font-style"
+          class="block w-full mb-2"
+        >
+          {#each fontStyles as style}
+            <option value={style}>{style}</option>
+          {/each}
+        </select>
+      </div>
     </div>
     <hr class="my-4" />
   {/each}

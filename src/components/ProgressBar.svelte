@@ -8,7 +8,7 @@
     {#each steps as step, index}
       <div class="flex-1 text-center">
         <div
-          class={`w-8 h-8 mx-auto rounded-full ${currentStep > index ? "bg-green-500" : "bg-gray-300"} text-white flex items-center justify-center`}
+          class={`w-8 h-8 mx-auto rounded-full ${currentStep > index ? "bg-green-500" : "bg-gray-400"} text-white flex items-center justify-center`}
         >
           {index + 1}
         </div>
@@ -16,8 +16,7 @@
       </div>
       {#if index < steps.length - 1}
         <div
-          class="w-1/6 border-t-2 mx-2"
-          style="border-color: {currentStep > index + 1 ? 'green' : 'gray'}"
+          class="w-1/6 border-t-2 mx-2 {currentStep > index + 1 ? 'border-green-500' : 'border-gray-300'}"
         ></div>
       {/if}
     {/each}

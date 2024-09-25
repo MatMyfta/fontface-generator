@@ -40,19 +40,21 @@
   };
 </script>
 
-<div class="min-h-screen bg-gray-100 flex flex-col">
-  <ProgressBar {currentStep} />
-  <div class="flex-grow container mx-auto p-4">
-    {#if currentStep === 1}
-      <!-- <Upload on:filesUploaded="{(e) => handleFilesUpload(e.detail.files)}" /> -->
-      <Upload on:nextStep="{nextStep}" />
-    {:else if currentStep === 2}
-      <FontSettings
-        on:settingsSubmitted="{(e) => handleSettingsSubmit(e.detail)}"
-        on:goBack="{prevStep}"
-      />
-    {:else if currentStep === 3}
-      <GeneratedCode {generatedCode} on:goBack="{prevStep}" />
-    {/if}
+<main class="bg-gray-100">
+  <div class="min-h-screen bg-gray-100 flex flex-col">
+    <ProgressBar {currentStep} />
+    <div class="flex-grow container mx-auto p-4">
+      {#if currentStep === 1}
+        <!-- <Upload on:filesUploaded="{(e) => handleFilesUpload(e.detail.files)}" /> -->
+        <Upload on:nextStep="{nextStep}" />
+      {:else if currentStep === 2}
+        <FontSettings
+          on:settingsSubmitted="{(e) => handleSettingsSubmit(e.detail)}"
+          on:goBack="{prevStep}"
+        />
+      {:else if currentStep === 3}
+        <GeneratedCode {generatedCode} on:goBack="{prevStep}" />
+      {/if}
+    </div>
   </div>
-</div>
+</main>

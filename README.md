@@ -1,47 +1,71 @@
-# Svelte + Vite
+# FontFace Generator
 
-This template should help get you started developing with Svelte in Vite.
+A simple Svelte application that generates the CSS `@font-face` code for uploaded font files. Built with Svelte (using JSX syntax) and Tailwind CSS, this frontend-only application follows modern UI/UX best practices to provide an intuitive user experience.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+- **Step-by-Step Interface**: Guided process divided into three steps with a progress bar:
+  1. **Upload Fonts**: Upload multiple font files.
+  2. **Font Settings**: Customize font weight, style, and other @font-face settings.
+  3. **Generated Code**: View and copy the generated @font-face CSS code.
+- **Modern UI/UX**: Responsive design with a clean and intuitive interface.
+- **No Server Required**: All operations are performed on the client side using the File API.
 
-## Need an official Svelte framework?
+## Prerequisites
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+- Node.js (v12 or later)
+- npm (Node Package Manager)
 
-## Technical considerations
+## Installation
 
-**Why use this over SvelteKit?**
+1. Clone the Repository
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `checkJs` in the JS template?**
-
-It is likely that most cases of changing variable types in runtime are likely to be accidental, rather than deliberate. This provides advanced typechecking out of the box. Should you like to take advantage of the dynamically-typed nature of JavaScript, it is trivial to change the configuration.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/sveltejs/svelte-hmr/tree/master/packages/svelte-hmr#preservation-of-local-state).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```js
-// store.js
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```bash
+git clone https://github.com/MatMyfta/fontface-generator.git
+cd fontface-generator
 ```
+
+2. Install Dependencies
+
+```bash
+npm install
+Running the Application
+```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+## Usage
+
+1. **Upload Fonts**
+    - Navigate to the application in your browser.
+    - In **Step 1**, click on the file input to select font files from your computer.
+    - Supported formats: .ttf, .otf, .woff, .woff2
+    - After selecting files, click the Next button to proceed.
+2. **Customize Font Settings**
+    - In **Step 2**, you'll see a list of uploaded font files.
+    - For each font, you can:
+      - **Edit the Font Family Name**: Defaulted to the file name without extension.
+      - **Select Font Weight**: Choose from common weights like normal, bold, or numerical values (100 to 900).
+      - **Select Font Style**: Choose between normal, italic, or oblique.
+    - Once you're satisfied with the settings, click the Generate button.
+3. **Copy Generated Code**
+   - In **Step 3**, the generated @font-face CSS code will be displayed.
+   - Click the **Copy to Clipboard** button to copy the code.
+   - You can now paste this code into your CSS files to use the fonts on your website.
+4. **Navigation**
+   - At any point in **Step 2** or **Step 3**, you can go back to the previous step using the **Back** button.
+
+## Technologies Used
+
+- **Svelte**: Frontend framework for building reactive user interfaces.
+- **JSX Syntax**: Using svelte-preprocess to write components in JSX.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **PostCSS**: Tool for transforming CSS with JavaScript plugins.
+
+## License
+
+This project is licensed under the MIT License.
