@@ -6,10 +6,8 @@
 
   uploadedFilesStore.subscribe((files) => {
     uploadedFiles = files;
-    console.log("Uploaded files in Step2 (store):", uploadedFiles);
   });
 
-  $: console.log("Uploaded files in Step2:", uploadedFiles);
   $: settings = uploadedFiles.length
     ? uploadedFiles.map((file) => ({
         fileName: file.name,
@@ -18,9 +16,6 @@
         fontStyle: "normal",
       }))
     : [];
-  $: console.log("Settings in Step2:", settings);
-
-  // console.log(uploadedFiles, settings);
 
   const fontWeights = [
     "100",

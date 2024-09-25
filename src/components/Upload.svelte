@@ -6,7 +6,6 @@
 
   const handleFileChange = (event) => {
     files = Array.from(event.target.files);
-    console.log("Files selected in Step1:", files);
   };
 
   const proceedToNext = () => {
