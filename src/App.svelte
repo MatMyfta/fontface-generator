@@ -1,47 +1,56 @@
 <script>
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+  import ProgressBar from "./components/ProgressBar.svelte";
+  import Upload from "./components/Upload.svelte";
+  import FontSettings from "./components/FontSettings.svelte";
+  import GeneratedCode from "./components/GeneratedCode.svelte";
+
+  let currentStep = 1;
+  let uploadedFiles = [];
+  let fontSettings = [];
+  let generatedCode = "";
+
+  const nextStep = () => (currentStep += 1);
+  const prevStep = () => (currentStep -= 1);
+
+  const handleFilesUpload = (files) => {
+    uploadedFiles = files;
+    nextStep();
+  };
+
+  const handleSettingsSubmit = (settings) => {
+    fontSettings = settings;
+    generateFontFaceCode();
+    nextStep();
+  };
+
+  const generateFontFaceCode = () => {
+    generatedCode = fontSettings
+      .map(
+        (setting) => `
+      @font-face {
+        font-family: '${setting.fontFamily}';
+        src: url('${setting.fileName}');
+        font-weight: ${setting.fontWeight};
+        font-style: ${setting.fontStyle};
+      }
+    `
+      )
+      .join("/n");
+  };
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+<div class="min-h-screen bg-gray-100 flex flex-col">
+  <ProgressBar {currentStep} />
+  <div class="flex-grow container mx-auto p-4">
+    {#if currentStep === 1}
+      <Upload on:filesUploaded={(e) => handleFilesUpload(e.detail)} />
+    {:else if currentStep === 2}
+      <FontSettings
+        on:settingsSubmitted={(e) => handleSettingsSubmit(e.detail)}
+        on:goBack={prevStep}
+      />
+    {:else if currentStep === 3}
+      <GeneratedCode {generatedCode} on:goBack={prevStep} />
+    {/if}
   </div>
-  <h1>Vite + Svelte</h1>
-
-  <div class="card">
-    <Counter />
-  </div>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
-</main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
+</div>
